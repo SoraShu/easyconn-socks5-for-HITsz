@@ -1,4 +1,4 @@
 @echo off
 ssh -L 1080:127.0.0.1:1080 root@xxxxxx
-echo "ÇÐ»»clashÅäÖÃ"
+echo "ï¿½Ð»ï¿½clashï¿½ï¿½ï¿½ï¿½"
 pause
