@@ -4,13 +4,18 @@
 
 ## easyconnect 从下载到放弃
 
-为什么放弃电脑上的 easyconnect？这是有原因的。可能是无数次的steam连接错误，CSGO服务器无法访问，以及关机时时不时弹出的`Sangfor***`正在运行，永远杀不掉的后台。当我又一次登不上steam，而我一个朋友向我抱怨说这CSGO又被 easyconnect 制裁了的时候，我破防了。
+不知道是软件太老还是其他什么原因（鬼知道），easyconnect这软件在桌面端屡屡显露出一些流氓特性。包括但不限于：
 
-easyconnect 流氓的地方还在于，它卸载的时候只会卸载程序主体，那些在服务上跑的`Sangefor***`它从来不管，就算你把它卸载了，还是偶尔会给你一些惊喜，而这些卸载残留清理起来又贼麻烦，也不能说我用一次卸一次清一次，但校外访问内网还是有需求的……
+1. 开机自启动的服务。服务大致长`Sangfor***`的样子。关也关不掉，taskkill之后又会再生。当然它作为service的子进程自启也是合理的。但我相信大多数人都不是每次开机后都需要使用这个软件。
+2. 卸载之后上述服务不会被删除，时不时在你玩游戏或者关机的时候给你惊喜。
+3. 自动安装的CA证书。该CA证书应该是起到了让你通过它访问网站的时候浏览器不会“跳不安全的站点”，但安装CA证书却不告知用户。
+4. 对深信服这个公司并不信任。关于深信服的黑料可自行搜索。
 
 受 [HITsz-daily-report][1],以及项目中使用的 [docker-easyconnect][2] 的启发，并且在某乎上找到了相关专栏，我决定将 easyconnect 放在服务器里跑，docker 干净又方便，然后配置socks5代理。
 
-## 简单上手
+## 简单上手（云服务器版）
+
+首先需要有一台云服务器。无服务器的win用户可以使用wsl起容器。见[本地docker方案](./本地docker方案.md)。
 
 ~~自己折腾是不可能的，只会用别人写好的，才能维持得了生活这样子~~
 
@@ -55,10 +60,6 @@ rules:
 
 具体规则写法：[clash规则编写](https://docs.cfw.lbyczf.com/contents/ui/profiles/rules.html)
 
-## 配置完成后的半自动化操作
-
-写一个简单的批处理进行端口转发并提示切换clash配置文件。docker可以以守护态长久运行。
-
 ## 体验
 
 不知道是不是错觉，感觉绕了一大弯子访问内网反而变快了，真是人间迷惑。
@@ -66,6 +67,8 @@ rules:
 ## 卸载 easyconnect
 
 见[uninstall the fucking easyconnect](uninstall-the-fucking-easyconnect.md)
+
+> 仓促成文，若有疑问请提[issue](https://github.com/SoraShu/easyconn-socks5-for-HITsz/issues/new)。
 
 [1]:https://github.com/JalinWang/HITsz-daily-report
 [2]:https://github.com/Hagb/docker-easyconnect

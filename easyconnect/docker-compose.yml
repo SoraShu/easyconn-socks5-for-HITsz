@@ -1,0 +1,18 @@
+version: "3"
+services:
+  easyconnect:
+    image: hagb/docker-easyconnect:cli
+    container_name: docker-easyconnect
+    environment:
+      - EC_VER=7.6.7
+      - IPTABLES_LEGACY=1
+      - CLI_OPTS="-d https://vpn.hitsz.edu.cn -u username -p password"
+      # 记得修改上面的username和password
+    ports:
+      - "1080:1080"
+    volumes:
+      - ./.easyconn:/root/.easyconn
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - "/dev/net/tun:/dev/net/tun"
